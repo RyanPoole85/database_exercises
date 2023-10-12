@@ -1,14 +1,12 @@
 use albums_db; describe albums;
 -- What is the primary key for the albums table? id
 -- What does the column named 'name' represent? album name
--- What do you think the sales column represents? Dollar amount of sales
-select name, artist from albums; 
+-- What do you think the sales column represents? Dollar amount of sales 
 -- Find the name of all albums by Pink Floyd. The Wall, The Dark Side of the Moon
+select name, artist from albums where artist = 'pink floyd';
 -- What is the year Sgt. Pepper's Lonely Hearts Club Band was released? 1967
-describe albums;
-select name, release_date from albums;
+select name, release_date from albums where name = 'Sgt. Pepper\'s Lonely Hearts Club Band';
 -- What is the genre for the album Nevermind? Grunge, Alternative rock
-select genre, name from albums;
 select genre, name from albums where name = 'Nevermind';
 -- Which albums were released in the 1990s?
 -- 'The Bodyguard','1992'
