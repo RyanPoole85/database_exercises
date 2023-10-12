@@ -38,4 +38,4 @@ select name, release_date from albums where release_date between 1990 and 1999;
 -- 'Titanic: Music from the Motion Picture','18.1'
 -- 'Nevermind','16.7'
 -- 'The Wall','17.6'
-select name, sales from albums where sales < 20;
+select name as Low_Selling_Albums, sales from albums where sales < 20;
