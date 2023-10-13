@@ -46,9 +46,9 @@ where last_name like 'E%E'
 order by hire_date desc;
 -- 7. Find all current or previous employees hired in the 90s and born on Christmas.
 -- Sort the results so that the oldest employee who was hired last is the first result. 
--- Enter a comment with the number of employees returned:346
--- the name of the oldest employee who was hired last: Vidya VanSchelk 
--- and the name of the youngest employee who was hired first: Lena Lenart
+-- Enter a comment with the number of employees returned:362
+-- the name of the oldest employee who was hired last: Khun Bernini
+-- and the name of the youngest employee who was hired first: Alseim Cappello
 select first_name, last_name, hire_date, birth_date 
-from employees where hire_date like '199%' and hire_date like '%-12-25'
+from employees where hire_date like '199%' and birth_date like '%-12-25'
 order by hire_date desc, birth_date asc;
