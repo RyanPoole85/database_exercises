@@ -23,13 +23,13 @@ select emp_no, first_name, last_name, gender
 from employees where (first_name 
 = 'Irena' or first_name = 'Vidya' or first_name = 'Maya') and gender = 'M';
 -- Find all unique last names that start with 'E'.
-select last_name from employees where last_name like 'E%';
+select distinct last_name from employees where last_name like 'E%';
 -- Find all unique last names that start or end with 'E'.
-select last_name from employees where last_name like 'E%' or last_name like '%E';
+select distinct last_name from employees where last_name like 'E%' or last_name like '%E';
 -- Find all unique last names that end with E, but does not start with E?
-select last_name from employees where last_name like '%E' and last_name not like 'E%';
+select distinct last_name from employees where last_name like '%E' and last_name not like 'E%';
 -- Find all unique last names that start and end with 'E'.
-select last_name from employees where last_name like 'E%' and last_name like '%E';
+select distinct last_name from employees where last_name like 'E%' and last_name like '%E';
 select hire_date from employees;
 -- Find all current or previous employees hired in the 90s. Enter a comment with the top three employee numbers.
 -- '10008','Saniya','Kalloufi','1994-09-15'
