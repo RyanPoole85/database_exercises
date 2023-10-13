@@ -18,10 +18,10 @@ from employees where first_name
 -- Find all current or previous employees with first names 'Irena', 'Vidya', or 'Maya', using OR, and who is male. What is the employee number of the top three results?
 -- '10200','Vidya','Awdeh'
 -- '10397','Irena','Reutenauer'
--- '10610','Irena','Roccetti'
-select emp_no, first_name, last_name, gender 
-from employees where first_name 
-= ('Irena') or first_name = ('Vidya') or first_name = ('Maya') and gender = m;
+-- '10821','Irena','Schurmann'
+select emp_no, first_name, last_name, gender
+from employees where (first_name 
+= 'Irena' or first_name = 'Vidya' or first_name = 'Maya') and gender = 'M';
 -- Find all unique last names that start with 'E'.
 select last_name from employees where last_name like 'E%';
 -- Find all unique last names that start or end with 'E'.
