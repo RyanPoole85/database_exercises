@@ -38,17 +38,17 @@ select hire_date from employees;
 select emp_no, first_name, last_name, hire_date 
 from employees where hire_date like '199%';
 -- Find all current or previous employees born on Christmas. Enter a comment with the top three employee numbers.
--- '10050','Yinghua','Dredge','1990-12-25'
--- '10456','Stepehn','Hardjono','1995-12-25'
--- '10463','Ung','Zaiane','1987-12-25'
-select emp_no, first_name, last_name, hire_date 
-from employees where hire_date like '%-12-25';
+-- '10078','Danel','Mondadori','1959-12-25'
+-- '10115','Chikara','Rissland','1964-12-25'
+-- '10261','Mang','Erie','1959-12-25'
+select emp_no, first_name, last_name, birth_date 
+from employees where birth_date like '%-12-25';
 -- Find all current or previous employees hired in the 90s and born on Christmas. Enter a comment with the top three employee numbers.
--- '10050','Yinghua','Dredge','1990-12-25'
--- '10456','Stepehn','Hardjono','1995-12-25'
--- '10517','Tiina','Speek','1990-12-25'
-select emp_no, first_name, last_name, hire_date 
-from employees where hire_date like '199%' and hire_date like '%-12-25';
+-- '10261','Mang','Erie','1993-10-20','1959-12-25'
+-- '10438','Evgueni','Srimani','1990-01-19','1961-12-25'
+-- '10681','Florina','Garnier','1992-10-25','1964-12-25'
+select emp_no, first_name, last_name, hire_date, birth_date
+from employees where hire_date like '199%' and birth_date like '%-12-25';
 -- Find all unique last names that have a 'q' in their last name.
 select last_name from employees where last_name like '%q%';
 -- Find all unique last names that have a 'q' in their last name but not 'qu'.
