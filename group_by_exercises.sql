@@ -1,17 +1,22 @@
 -- 1. Create a new file named group_by_exercises.sql
-
+Use employees;
 -- 2. In your script, use DISTINCT to find the unique titles 
 -- in the titles table. How many unique titles have there ever been? 7
 -- Answer that in a comment in your SQL file.
-use titles;
-describe titles;
 select distinct title from titles;
+
+describe titles;
+select count(distinct title) from titles;
+-- 7
 
 -- 3. Write a query to find a list of all unique last names that start and 
 -- end with 'E' using GROUP BY.
-use employees;
 select last_name from employees 
 	group by last_name having last_name like 'e%e';
+-- or    
+select last_name from employees
+	where last_name like 'e%e'
+    group by last_name;
 
 -- 4. Write a query to find all unique combinations of first and last names
 -- of all employees whose last names start and end with 'E'.
@@ -28,19 +33,18 @@ select last_name from employees
 
 -- 6. Add a COUNT() to your results for exercise 5 to find the number of 
 -- employees with the same last name.
-select count(*) from employees
+select last_name, count(*) from employees
 	group by last_name 
     having last_name like '%q%' 
     and last_name not like '%qu%';
 
 -- 7. Find all employees with first names 'Irena', 'Vidya', or 'Maya'. 
 -- Use COUNT(*) and GROUP BY to find the number of employees with those names for each gender.
-select count(*), gender
+select first_name, count(*), gender
 	from employees
     where first_name in ('Irena', 'Vidya', 'Maya')
-    group by gender;
--- 441 M
--- 268 F
+    group by first_name, gender
+    order by first_name;
 
 -- 8. Using your query that generates a username for all employees, 
 -- generate a count of employees with each unique username.
@@ -49,8 +53,7 @@ select lower(concat(substr(first_name,1,1),
     substr(birth_date,6,2),
     substr(birth_date,3,2))) as username,
     count(*) as duplicate_count from employees
-    GROUP BY username
-    HAVING (duplicate_count = 1);
+    GROUP BY username;
 
 -- 9. From your previous query, are there any duplicate usernames? Yes
 -- What is the highest number of times a username shows up? 6 times
