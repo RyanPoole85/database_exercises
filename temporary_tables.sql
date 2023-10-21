@@ -53,7 +53,7 @@ update sakila_payments set amount = amount * 100;
 -- For this comparison, you will calculate the z-score for each salary. 
 
 create temporary table avg_current_pay(
-SELECT dept_name, avg(salary)
+SELECT dept_name, avg(salary) as d_salary
 	FROM employees.employees
 	JOIN employees.dept_emp USING(emp_no)
 	JOIN employees.departments USING(dept_no)
@@ -62,27 +62,37 @@ where dept_emp.to_date >now()
 and salaries.to_date >now()
 group by dept_name);
 
-create temporary table overall_average
-	(
-    select avg(salary)
-    from employees.salaries
-    where to_date >now());
-    
-select * from overall_average;
-select * from avg_current_pay;
+create temporary table std (
+select 
+	avg(salary) as overall_avg
+    ,std(salary) as overall_std
+from employees.salaries as s
+where to_date > now()
+);
+select * from std;
+create temporary table avg_with_std (
+select *
+from avg_current_pay
+join std
+);
+select * from std;
+
+alter table avg_with_std add zscore float;
+update avg_with_std set zscore = (d_salary - overall_avg) / overall_std;
+
+
+ -- final table: avg_with_std
+select * from avg_with_std;
+
+drop table avg_with_std;
 drop table avg_current_pay;
 
-SELECT
-        (avg_current_pay.avg(salary)) - (select employees.avg(salary)
-    from employees.salaries
-    where employees.salaries.to_date >now())
-        /
-        (SELECT stddev(avg_current_pay.avg(salary))) AS zscore
-    FROM avg_current_pay
-    WHERE employees.salaries.to_date > now()
-    group by zscore;
-    
 -- In terms of salary, what is the best department right now to work for? The worst?
+select * from avg_with_std
+order by zscore desc;
+-- Best: sales
+-- Worst: Human Resources
+
 
 -- BONUS Determine the overall historic average department average salary, the historic
 -- overall average, and the historic z-scores for salary. Do the z-scores for current 
