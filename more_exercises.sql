@@ -246,40 +246,84 @@ select first_name,
 select city_id from city;
 
 -- Display the first and last names in all lowercase of all the actors.
-select lower(first_name, last_name)
+select lower(concat(first_name,' ', last_name)), actor_id
 from actor;
 -- You need to find the ID number, first name, and last name of an actor, of 
 -- whom you know only the first name, "Joe." What is one query would you use 
 -- to obtain this information?
+select lower(first_name), lower(last_name), actor_id
+from actor
+where first_name like 'Joe%';
 
 -- Find all actors whose last name contain the letters "gen":
-
+select lower(first_name), lower(last_name), actor_id
+from actor
+where last_name like '%gen%';
 -- Find all actors whose last names contain the letters "li". 
 -- This time, order the rows by last name and first name, in that order.
+select lower(first_name)first_name, lower(last_name) last_name, actor_id
+from actor
+where last_name like '%li%'
+order by last_name, first_name;
 
 -- Using IN, display the country_id and country columns for the following countries: 
 -- Afghanistan, Bangladesh, and China.
+select country_id, country from country
+	where country in ('Afghanistan','Bangladesh','China');
 
 -- List the last names of all the actors, as well as how many actors have that last name.
+select count(*) cnt,last_name from actor
+	group by last_name;
 
 -- List last names of actors and the number of actors who have that last name, 
 -- but only for names that are shared by at least two actors
+select last_name, count(*) cnt from actor
+    group by last_name having cnt >=2;
 
 -- You cannot locate the schema of the address table. Which query would you use to recreate it?
-
+describe address;
 -- Use JOIN to display the first and last names, as well as the address, of each staff member.
+select concat(first_name,' ',last_name) full_name, a.address from staff
+	join address a
+    using (address_id);
 
 -- Use JOIN to display the total amount rung up by each staff member in August of 2005.
+select * from payment;
+select concat(first_name,' ',last_name) full_name, sum(p.amount) from staff
+	join payment p
+    using (staff_id)
+    where p.payment_date like ('2005-08%')
+    group by full_name;
 
 -- List each film and the number of actors who are listed for that film.
-
+select title, count(*) cnt from film
+	join film_actor
+    using (film_id)
+    group by title;
+    
 -- How many copies of the film Hunchback Impossible exist in the inventory system?
+select title, count(*) cnt from film
+	join inventory i
+    using (film_id)
+    group by title having title = 'Hunchback Impossible'
+    ;
+    
 -- The music of Queen and Kris Kristofferson have seen an unlikely resurgence. 
 -- As an unintended consequence, films starting with the letters K and Q have also 
 -- soared in popularity. Use subqueries to display the titles of movies starting with 
 -- the letters K and Q whose language is English.
+(select name from language
+	where name in ('English'));
+
+select title, l.name from film
+	join language l using (language_id)
+	where title like 'k%'or title like 'Q%'
+    and l.name in (select name from language
+	where name in ('English'));
+
 
 -- Use subqueries to display all actors who appear in the film Alone Trip.
+
 -- You want to run an email marketing campaign in Canada, for which you will need the 
 -- names and email addresses of all Canadian customers.
 -- Sales have been lagging among young families, and you wish to target all family 
