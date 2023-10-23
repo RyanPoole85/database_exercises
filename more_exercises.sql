@@ -323,14 +323,57 @@ select title, l.name from film
 
 
 -- Use subqueries to display all actors who appear in the film Alone Trip.
-
+select concat(first_name,' ',last_name) Actor_name, f.title from actor
+	join film_actor fa
+    using (actor_id)
+    join film f
+    using (film_id)
+    where f.title in 
+		(select f.title from film
+        where f.title = 'Alone Trip');
+        
 -- You want to run an email marketing campaign in Canada, for which you will need the 
 -- names and email addresses of all Canadian customers.
+select concat(first_name,' ',last_name) customer_name, email, country from customer
+	join address a
+    using (address_id)
+    join city c
+    using (city_id)
+    join country co
+    using (country_id)
+    -- group by customer_name having
+	where country = 'Canada';
+
 -- Sales have been lagging among young families, and you wish to target all family 
 -- movies for a promotion. Identify all movies categorized as family films.
+select title, c.name from film
+	join film_category
+    using (film_id)
+    join category c
+    using (category_id)
+    where c.name = 'family';
+
 -- Write a query to display how much business, in dollars, each store brought in.
+select * from payment;
+select * from inventory;
+select s.store_id store, sum(amount) from payment
+	join customer
+    using (customer_id)
+    join inventory i
+    using (store_id)
+    join store s
+    using (store_id)
+    group by store, amount;
 
 -- Write a query to display for each store the store ID, city, and country.
+select store_id, c.city, co.country from store
+	join address a
+    using (address_id)
+    join city c
+    using (city_id)
+    join country co
+    using (country_id);
+
 -- List the top five genres in gross revenue in descending order. 
 -- (Hint: you may need to use the following tables: category, 
 -- film_category, inventory, payment, and rental.)
