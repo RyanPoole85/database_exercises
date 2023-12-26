@@ -18,3 +18,5 @@ join properties_2017 using (storytypeid)
 join propertylandusetype using (propertylandusetypeid)
 where propertylandusedesc in ('Single Family Residential')
 	group by storydesc;
+    
+select * from predictions_2017;
