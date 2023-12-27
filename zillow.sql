@@ -19,4 +19,5 @@ join propertylandusetype using (propertylandusetypeid)
 where propertylandusedesc in ('Single Family Residential')
 	group by storydesc;
     
-select * from predictions_2017;
+select fireplaceflag from properties_2017;
+select * from storytype;
