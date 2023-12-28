@@ -20,4 +20,13 @@ where propertylandusedesc in ('Single Family Residential')
 	group by storydesc;
     
 select fireplaceflag from properties_2017;
+
+select fireplaceflag, count(fireplaceflag) cnt, 
+	avg(taxvaluedollarcnt) cost  from properties_2017
+	group by fireplaceflag;
+
+select hashottuborspa, count(hashottuborspa) cnt, 
+	avg(taxvaluedollarcnt) cost from properties_2017
+	group by hashottuborspa;
+    
 select * from storytype;
