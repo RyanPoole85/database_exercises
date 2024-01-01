@@ -28,5 +28,6 @@ select fireplaceflag, count(fireplaceflag) cnt,
 select hashottuborspa, count(hashottuborspa) cnt, 
 	avg(taxvaluedollarcnt) cost from properties_2017
 	group by hashottuborspa;
-    
+select count(yardbuildingsqft17) cnt, yardbuildingsqft17 from properties_2017
+	group by yardbuildingsqft17;
 select * from storytype;
