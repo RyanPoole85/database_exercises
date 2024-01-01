@@ -70,7 +70,7 @@ group by Department_Groups;
 
 -- Remove duplicate employees from exercise 1.
 
-select concat(first_name,' ',last_name) as Employee_Name, 
+select distinct concat(first_name,' ',last_name) as Employee_Name, emp_no,
 	de.dept_no,
     de.from_date start_date, 
     de.to_date end_date,
