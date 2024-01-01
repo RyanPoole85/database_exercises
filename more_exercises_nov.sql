@@ -793,6 +793,8 @@ select topping_amount, count(topping_amount) cnt from pizza_toppings
 group by topping_amount
 ;
 select * from toppings;
+select * from sizes;
+
 -- How many orders consist of pizza(s) that are only cheese? What is the average price of these orders? The most common pizza size?
 -- How many large pizzas have olives on them?
 -- What is the average number of toppings per pizza?
