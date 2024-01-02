@@ -31,3 +31,4 @@ select hashottuborspa, count(hashottuborspa) cnt,
 select count(yardbuildingsqft17) cnt, yardbuildingsqft17 from properties_2017
 	group by yardbuildingsqft17;
 select * from storytype;
+select regionidcounty from properties_2017;
