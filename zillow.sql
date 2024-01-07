@@ -32,3 +32,6 @@ select count(yardbuildingsqft17) cnt, yardbuildingsqft17 from properties_2017
 	group by yardbuildingsqft17;
 select latitude, longitude from properties_2017;
 select * from properties_2017;
+select bathroomcnt, calculatedfinishedsquarefeet from properties_2017
+	where bathroomcnt > 0
+    order by bathroomcnt;
