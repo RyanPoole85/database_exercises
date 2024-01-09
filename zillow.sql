@@ -35,3 +35,4 @@ select * from properties_2017;
 select bathroomcnt, calculatedfinishedsquarefeet from properties_2017
 	where bathroomcnt > 0
     order by bathroomcnt;
+select * from properties_2017;
